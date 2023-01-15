@@ -23,49 +23,29 @@ def caesarCipher(text, shift, cryptFlag):
 			char = text[i]
 			
 			if(char.isupper()):
-				result += chr(
-					(ord(char)		#returns numerical value for char
-						+ shift		#applies chosen offset
-						- ORDVAL_A	#Alphabetical wrap-around step 1
-						)	
-					% NUML_ALPHABET		#Alphabetical wrap-around step 2
-					+ ORDVAL_A		#Completes lphabetical wrap-around 
-					)
+				result += chr((ord(char) 				# Returns numerical value for char
+					+ shift						# Applies chosen offset
+					- ORDVAL_A) % NUML_ALPHABET + ORDVAL_A)		# Applies alphabetical wrap-around
 			elif(char.islower()):
-				result += chr(
-					(ord(char)		#returns numerical value for char
-						+ shift		#applies chosen offset
-						- ORDVAL_a	#Alphabetical wrap-around step 1
-						)	
-					% NUML_ALPHABET		#Alphabetical wrap-around step 2
-					+ ORDVAL_a		#Completes lphabetical wrap-around 
-					)
+				result += chr((ord(char)				# Returns numerical value for char
+					+ shift						# Applies chosen offset
+					- ORDVAL_a) % NUML_ALPHABET + ORDVAL_a)		# Applies alphabetical wrap-around
 			else:
-				result += char
+				result += char						# Retains special character
 	elif(cryptFlag == 'd'):
 		for i in range(len(text)):
 			char = text[i]
 			
 			if(char.isupper()):
-				result += chr(
-					(ord(char)		#returns numerical value for char
-						- shift		#applies chosen offset
-						- ORDVAL_A	#Alphabetical wrap-around step 1
-						)	
-					% NUML_ALPHABET		#Alphabetical wrap-around step 2
-					+ ORDVAL_A		#Completes lphabetical wrap-around 
-					)
+				result += chr((ord(char) 				# Returns numerical value for char
+					- shift						# Applies chosen offset
+					- ORDVAL_A) % NUML_ALPHABET + ORDVAL_A)		# Applies alphabetical wrap-around
 			elif(char.islower()):
-				result += chr(
-					(ord(char)		#returns numerical value for char
-						- shift		#applies chosen offset
-						- ORDVAL_a	#Alphabetical wrap-around step 1
-						)	
-					% NUML_ALPHABET		#Alphabetical wrap-around step 2
-					+ ORDVAL_a		#Completes lphabetical wrap-around 
-					)
+				result += chr((ord(char)				# Returns numerical value for char
+					- shift						# Applies chosen offset
+					- ORDVAL_a) % NUML_ALPHABET + ORDVAL_a)		# Applies alphabetical wrap-around
 			else:
-				result += char
+				result += char						# Retains special character
 	else:
 		print("Error: Invalid crypt option")
 		
@@ -82,16 +62,15 @@ def vigenereCipher(text, key, cryptFlag):
 			char = text[i]
 			
 			if(char.isupper()):
-				result += chr((ord(char)							#returns numerical value for char
-					+ (ord(key.upper()[((i - punctCount) % (len(key)))]) - ORDVAL_A)	#Applies key-based offset
-					- ORDVAL_A) % NUML_ALPHABET + ORDVAL_A)					#Alphabetical wrap-around
-				
+				result += chr((ord(char)							# Returns numerical value for char
+					+ (ord(key.upper()[((i - punctCount) % (len(key)))]) - ORDVAL_A)	# Applies key-based offset
+					- ORDVAL_A) % NUML_ALPHABET + ORDVAL_A)					# Applies alphabetical wrap-around
 			elif(char.islower()):
-				result += chr((ord(char)							#returns numerical value for char
-					+ (ord(key.lower()[((i - punctCount) % (len(key)))]) - ORDVAL_a)	#Applies key-based offset
-					- ORDVAL_a) % NUML_ALPHABET + ORDVAL_a)					#Alphabetical wrap-around
+				result += chr((ord(char)							# Returns numerical value for char
+					+ (ord(key.lower()[((i - punctCount) % (len(key)))]) - ORDVAL_a)	# Applies key-based offset
+					- ORDVAL_a) % NUML_ALPHABET + ORDVAL_a)					# Applies alphabetical wrap-around
 			else:
-				result += char
+				result += char									# Retains special character
 				punctCount += 1
 	
 	elif(cryptFlag == 'd'):
@@ -99,16 +78,16 @@ def vigenereCipher(text, key, cryptFlag):
 			char = text[i]
 			
 			if(char.isupper()):
-				result += chr((ord(char)							#returns numerical value for char
-					- (ord(key.upper()[((i - punctCount) % (len(key)))]) - ORDVAL_A)	#Applies key-based offset
-					- ORDVAL_A) % NUML_ALPHABET + ORDVAL_A)					#Alphabetical wrap-around
+				result += chr((ord(char)							# Returns numerical value for char
+					- (ord(key.upper()[((i - punctCount) % (len(key)))]) - ORDVAL_A)	# Applies key-based offset
+					- ORDVAL_A) % NUML_ALPHABET + ORDVAL_A)					# Applies alphabetical wrap-around
 				
 			elif(char.islower()):
-				result += chr((ord(char)							#returns numerical value for char
-					- (ord(key.lower()[((i - punctCount) % (len(key)))]) - ORDVAL_a)	#Applies key-based offset
-					- ORDVAL_a) % NUML_ALPHABET + ORDVAL_a)					#Alphabetical wrap-around
+				result += chr((ord(char)							# Returns numerical value for char
+					- (ord(key.lower()[((i - punctCount) % (len(key)))]) - ORDVAL_a)	# Applies key-based offset
+					- ORDVAL_a) % NUML_ALPHABET + ORDVAL_a)					# Applies alphabetical wrap-around
 			else:
-				result += char
+				result += char									# Retains special character
 				punctCount += 1
 	else:
 		print("Error: Invalid crypt option")
@@ -124,11 +103,17 @@ def beaufortCipher(text, key):
 		char = text[i]
 		
 		if(char.isupper()):
-			result += chr(((ord(key.upper()[((i - punctCount) % (len(key)))]) - ord(char)) % NUML_ALPHABET) + ORDVAL_A)
+			result += chr(((ord(key.upper()[((i - punctCount) % (len(key)))])	# Returns numerical value for key
+				- ord(char))							# Subtracts numerical value for char
+				% NUML_ALPHABET)						# Applies for alphabetical wrap-around
+				+ ORDVAL_A)							# Applies offset
 		elif(char.islower()):
-			result += chr(((ord(key.lower()[((i - punctCount) % (len(key)))]) - ord(char)) % NUML_ALPHABET) + ORDVAL_a)
+			result += chr(((ord(key.lower()[((i - punctCount) % (len(key)))])	# Returns numerical value for key
+				- ord(char))							# Subtracts numerical value for char
+				% NUML_ALPHABET)						# Applies for alphabetical wrap-around
+				+ ORDVAL_a)							# Applies offset
 		else:
-			result += char
+			result += char								# Retains special character
 			punctCount += 1
 				
 	print("Result is: " + result)
@@ -163,8 +148,8 @@ def main():
 		
 	elif(functionToUse == "b"):
 		cipherKey = input("Enter the cipher key to use: ")
-		beaufortCipher(			
+		beaufortCipher(			# Symmetric cipher, crypt flag not needed
 			textToCipher,		# text to be run de/ciphered
 			cipherKey,		# key to use as the variable offest
-		)	# cipher is symmetric and does not need cryptStyle flag
+		)	
 main()

@@ -143,7 +143,7 @@ def main():
 	textToCipher = input("Enter text: ")
 	
 	if(functionToUse == "c"):
-		print("For Cesar cipher use an offset of 3, for ROT13 use an offset of 13")
+		print("\nFor Cesar cipher use an offset of 3, for ROT13 use an offset of 13")
 		offsetToUse = int(input("Enter an offest to use: "))
 		cryptStyle = input("Enter 'e' to encrypt & 'd' to decrypt: ")
 		caesarCipher(
